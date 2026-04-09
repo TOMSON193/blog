@@ -6,9 +6,12 @@ import './App.css';
 
 function App() {
 
-  let [글제목, 글제목변경] = useState(['BBB', 'CCC', 'AAA Link 팀']);
+  let [글제목, 글제목변경] = useState(['ReactBlog', '남자코트추천', 'Link 팀']);
 
   let [따봉, 따봉변경] = useState(0);
+  let [modal, setModal] = useState(1);
+  
+
 
   return (
     <div className="App">
@@ -35,25 +38,18 @@ function App() {
       </button>
 
       <div className="cha">
-        <h4>{글제목[2]}</h4> 
-
+        <h4 onClick={()=>{ setModal(true) }}>{글제목[2]}</h4> 
+        <button onClick={()=>{ setModal(modal+1) }}>제목</button>
       </div>
 
-      
-      <Modal/> 
-      <Modal2/>
-
+      {
+        modal%2 == 0? <Modal></Modal>: null
+      }
     </div>
   )
 }
 
-let Modal2 = ()=> {
-  return (
-    <div calssName='cc'>
-      <h4>안녕</h4>
-    </div>
-  )
-}
+
 
 function Modal(){// -< 컴포넌트라고 부름
   return (

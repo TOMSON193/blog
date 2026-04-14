@@ -16,6 +16,8 @@ function App() {
   
   let [입력값, 입력값변경]=useState('');
 
+  let now = new Date().toLocaleDateString();
+
 
   return (
     <div className="App">
@@ -96,16 +98,21 @@ function App() {
         
       </input>
       <button onClick={()=>{
+          if(입력값.trim() === '') {
+            alert('글을 입력해주세요');
+            return;
+          }
           let copy=[...글제목];
           copy.unshift(입력값);
           글제목변경(copy);
           let copy2=[...따봉];
           copy2.unshift(0);
           따봉변경(copy2);
+          입력값변경('');
         }}>글작성</button> 
 
 
-    {modal % 2 == 0? <Modal 글제목={글제목} i={modalnum} />: null}
+    {modal % 2 == 0? <Modal 글제목={글제목} i={modalnum} now={now}/>: null}
 
       
     </div>
@@ -118,7 +125,7 @@ function Modal(props){// -< 컴포넌트라고 부름
   return (
     <div className='modal'>
         <h4>{props.글제목[props.i]}</h4>
-        <p>날짜</p>
+        <p>{props.now}</p>
         <p>상세내용</p>
         {/* <button onClick={()=>{
           let copy=[...props.글제목];
